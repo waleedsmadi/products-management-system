@@ -55,5 +55,26 @@ submit.onclick = function(){
         dataPro.push(newProduct);
     }
     localStorage.setItem("the_product", JSON.stringify(dataPro));
+
+    // clear data
+    clearData();
+
+    // reset total field
+    getTotal();
 }
 
+
+
+
+
+// clear data
+function clearData(){
+    title.value = '';
+    price.value = '';
+    taxes.value = '';
+    ads.value = '';
+    discount.value = '';
+    total.innerHTML = '';
+    count.value = '';
+    category.value = '';
+}
