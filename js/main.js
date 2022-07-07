@@ -28,6 +28,9 @@ function getTotal(){
 
 // check local storage
 let dataPro;
+let mood = 'create';
+let temp;
+
 if(localStorage.getItem("the_product") != null){
     dataPro = JSON.parse(localStorage.getItem("the_product"));
 }else{
@@ -47,12 +50,22 @@ submit.onclick = function(){
         category:category.value
     }
     
-    if(newProduct.count > 1){
-        for(let i=0; i<newProduct.count; i++){
+    if(mood === 'create'){
+        if(newProduct.count > 1){
+            for(let i=0; i<newProduct.count; i++){
+                dataPro.push(newProduct);
+            }
+        }else{
             dataPro.push(newProduct);
         }
     }else{
-        dataPro.push(newProduct);
+        dataPro[temp] = newProduct;
+
+        mood = 'create';
+
+        count.style.display = 'block';
+
+        this.innerHTML = 'Create';
     }
     localStorage.setItem("the_product", JSON.stringify(dataPro));
 
@@ -101,7 +114,7 @@ function showData(){
             <td>${dataPro[i].discount}</td>
             <td>${dataPro[i].total}</td>
             <td>${dataPro[i].category}</td>
-            <td><button id="update">UPDATE</button></td>
+            <td><button onclick="updateData(${i});" id="update">UPDATE</button></td>
             <td><button onclick="deleteData(${i});" id="delete">DELETE</button></td>
         </tr>        
      `;
@@ -134,4 +147,37 @@ function deleteAll(){
     dataPro.splice(0);
     localStorage.clear();
     showData();
+}
+
+
+
+// update data
+function updateData(id){
+    title.value = dataPro[id].title;
+    price.value = dataPro[id].price;
+    taxes.value = dataPro[id].taxes;
+    ads.value = dataPro[id].ads;
+    discount.value = dataPro[id].discount;
+    category.value = dataPro[id].category;
+
+    // calculate the total
+    getTotal();
+
+    // hide count filed
+    count.style.display = "none";
+
+    // change create filed to update
+    submit.innerHTML = 'Update';
+
+    // change mood 
+    mood = 'update';
+
+    // make id global
+    temp = id;
+
+
+    scroll({
+        top: "0",
+        behavior: "smooth",
+    })
 }
