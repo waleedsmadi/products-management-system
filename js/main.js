@@ -181,3 +181,65 @@ function updateData(id){
         behavior: "smooth",
     })
 }
+
+
+
+// get search mood
+let searchMood = "title";
+function getSearchMood(id){
+    if(id === 'search-title'){
+        searchMood = 'title';
+    }else{
+        searchMood = 'category';
+    }
+    const search = document.querySelector("#search");
+
+    search.placeholder = "Search By " + searchMood;
+}
+
+
+// search function
+function searchData(val){
+    let table = '';
+    for(let i=0; i<dataPro.length; i++){
+        if(searchMood === 'title'){
+            if(dataPro[i].title.includes(val)){
+                table += `
+
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${dataPro[i].title}</td>
+                        <td>${dataPro[i].price}</td>
+                        <td>${dataPro[i].taxes}</td>
+                        <td>${dataPro[i].ads}</td>
+                        <td>${dataPro[i].discount}</td>
+                        <td>${dataPro[i].total}</td>
+                        <td>${dataPro[i].category}</td>
+                        <td><button onclick="updateData(${i});" id="update">UPDATE</button></td>
+                        <td><button onclick="deleteData(${i});" id="delete">DELETE</button></td>
+                    </tr>        
+                `;
+            }
+        }else{
+            if(dataPro[i].category.includes(val)){
+                table += `
+
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>${dataPro[i].title}</td>
+                        <td>${dataPro[i].price}</td>
+                        <td>${dataPro[i].taxes}</td>
+                        <td>${dataPro[i].ads}</td>
+                        <td>${dataPro[i].discount}</td>
+                        <td>${dataPro[i].total}</td>
+                        <td>${dataPro[i].category}</td>
+                        <td><button onclick="updateData(${i});" id="update">UPDATE</button></td>
+                        <td><button onclick="deleteData(${i});" id="delete">DELETE</button></td>
+                    </tr>        
+                `;
+            }
+        }
+    }
+
+    document.querySelector("#tbody").innerHTML = table;
+}
