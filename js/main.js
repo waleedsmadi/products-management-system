@@ -50,27 +50,30 @@ submit.onclick = function(){
         category:category.value
     }
     
-    if(mood === 'create'){
-        if(newProduct.count > 1){
-            for(let i=0; i<newProduct.count; i++){
+    if(price.value != '' && title.value != '' && category.value != '' && count.value < 100){
+        if(mood === 'create'){
+            if(newProduct.count > 1){
+                for(let i=0; i<newProduct.count; i++){
+                    dataPro.push(newProduct);
+                }
+            }else{
                 dataPro.push(newProduct);
             }
         }else{
-            dataPro.push(newProduct);
+            dataPro[temp] = newProduct;
+    
+            mood = 'create';
+    
+            count.style.display = 'block';
+    
+            this.innerHTML = 'Create';
         }
-    }else{
-        dataPro[temp] = newProduct;
-
-        mood = 'create';
-
-        count.style.display = 'block';
-
-        this.innerHTML = 'Create';
+        // clear data
+        clearData();
     }
     localStorage.setItem("the_product", JSON.stringify(dataPro));
 
-    // clear data
-    clearData();
+    
 
     // reset total field
     getTotal();
