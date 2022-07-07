@@ -75,3 +75,29 @@ input:focus{
     transform: scale(1.1);
     background-color: #000;
 }
+
+
+
+
+
+
+
+/* Style outputs */
+.search-block{
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-block button{
+    width: 45%;
+}
+
+table{
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+tr,td,th{
+    padding: 5px;
+}
