@@ -61,6 +61,9 @@ submit.onclick = function(){
 
     // reset total field
     getTotal();
+
+    // show data
+    showData();
 }
 
 
@@ -78,3 +81,32 @@ function clearData(){
     count.value = '';
     category.value = '';
 }
+
+
+
+
+
+// read data
+function showData(){
+    let table = '';
+    for(let i=0; i<dataPro.length; i++){
+        table += `
+
+        <tr>
+            <td>${i+1}</td>
+            <td>${dataPro[i].title}</td>
+            <td>${dataPro[i].price}</td>
+            <td>${dataPro[i].taxes}</td>
+            <td>${dataPro[i].ads}</td>
+            <td>${dataPro[i].discount}</td>
+            <td>${dataPro[i].total}</td>
+            <td>${dataPro[i].category}</td>
+            <td><button id="update">UPDATE</button></td>
+            <td><button id="delete">DELETE</button></td>
+        </tr>        
+     `;
+    }
+
+    document.querySelector("#tbody").innerHTML = table;
+}
+showData();
