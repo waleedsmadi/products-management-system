@@ -24,3 +24,36 @@ function getTotal(){
 
 
 
+
+
+// check local storage
+let dataPro;
+if(localStorage.getItem("the_product") != null){
+    dataPro = JSON.parse(localStorage.getItem("the_product"));
+}else{
+    dataPro = [];
+}
+
+// create product
+submit.onclick = function(){
+    let newProduct = {
+        title:title.value,
+        price:price.value,
+        taxes:taxes.value,
+        ads:ads.value,
+        discount:discount.value,
+        total:total.innerHTML,
+        count:count.value,
+        category:category.value
+    }
+    
+    if(newProduct.count > 1){
+        for(let i=0; i<newProduct.count; i++){
+            dataPro.push(newProduct);
+        }
+    }else{
+        dataPro.push(newProduct);
+    }
+    localStorage.setItem("the_product", JSON.stringify(dataPro));
+}
+
