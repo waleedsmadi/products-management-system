@@ -108,6 +108,13 @@ function showData(){
     }
 
     document.querySelector("#tbody").innerHTML = table;
+
+    // for delete all function
+    if(dataPro.length > 0){
+        document.querySelector("#delete-all").innerHTML = '<button onclick="deleteAll()" >Delete all</button>'
+    }else{
+        document.querySelector("#delete-all").innerHTML = '';
+    }
 }
 showData();
 
@@ -119,5 +126,12 @@ showData();
 function deleteData(id){
     dataPro.splice(id,1);
     localStorage.setItem("the_product", JSON.stringify(dataPro));
+    showData();
+}
+
+
+function deleteAll(){
+    dataPro.splice(0);
+    localStorage.clear();
     showData();
 }
